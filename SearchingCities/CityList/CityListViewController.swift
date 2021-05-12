@@ -13,42 +13,83 @@
 import UIKit
 
 protocol CityListDisplayLogic: AnyObject {
+    
 }
 
 final class CityListViewController: UIViewController, CityListDisplayLogic {
-  var interactor: CityListBusinessLogic?
-  var router: (NSObjectProtocol & CityListRoutingLogic & CityListDataPassing)?
+    
+    var interactor: CityListBusinessLogic?
+    var router: (NSObjectProtocol & CityListRoutingLogic & CityListDataPassing)?
+    
+    @IBOutlet private var tableView: UITableView!
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController = self
+        let interactor = CityListInteractor()
+        let presenter = CityListPresenter()
+        let router = CityListRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerTableView()
+        setSearchViewController()
+    }
+    
+    private func registerTableView() {
+        
+    }
+    
+    private func setSearchViewController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Cities"
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.accessibilityScroll(.down)
+        definesPresentationContext = true
+    }
+    
+}
 
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController = self
-    let interactor = CityListInteractor()
-    let presenter = CityListPresenter()
-    let router = CityListRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+}
+
+extension CityListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
 }
