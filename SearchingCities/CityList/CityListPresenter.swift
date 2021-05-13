@@ -13,9 +13,25 @@
 import UIKit
 
 protocol CityListPresentationLogic {
+    func presentCityList(cityItemList: [CityList.CityItemModel])
 }
 
 final class CityListPresenter: CityListPresentationLogic {
+    
   weak var viewController: CityListDisplayLogic?
 
+    func presentCityList(cityItemList: [CityList.CityItemModel]) {
+        let sortedItemList = cityItemList.sorted {
+            guard let first = $0.name else {
+                return false
+            }
+            guard let second = $1.name else {
+                return true
+            }
+
+            return first.localizedCaseInsensitiveCompare(second) == ComparisonResult.orderedAscending
+        }
+        
+        viewController?.displayCityList(cityItemList: sortedItemList)
+    }
 }

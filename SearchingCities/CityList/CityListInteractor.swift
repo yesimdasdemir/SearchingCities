@@ -13,13 +13,41 @@
 import UIKit
 
 protocol CityListBusinessLogic {
+    func getCityList()
 }
 
 protocol CityListDataStore {
-  //var name: String { get set }
+    //var name: String { get set }
 }
 
 final class CityListInteractor: CityListBusinessLogic, CityListDataStore {
-  var presenter: CityListPresentationLogic?
-
+    var presenter: CityListPresentationLogic? = nil
+    
+    var viewModel: CityList.CityItemModel?
+    
+    func getCityList() {
+        
+        let url = Bundle.main.url(forResource: "cities", withExtension: "json")!
+        
+        do {
+            let jsonData = try Data(contentsOf: url)
+            parse(jsonData: jsonData)
+            print("yesim")
+        }
+        catch {
+            print(error)
+        }
+        
+    }
+    
+    private func parse(jsonData: Data) {
+        do {
+            let cityItemList = try JSONDecoder().decode([CityList.CityItemModel].self, from: jsonData)
+            
+            presenter?.presentCityList(cityItemList: cityItemList)
+            debugPrint("decoded successfully")
+        } catch {
+            print("error: \(error)")
+        }
+    }
 }

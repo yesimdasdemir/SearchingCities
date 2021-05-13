@@ -13,7 +13,7 @@
 import UIKit
 
 protocol CityListDisplayLogic: AnyObject {
-    
+    func displayCityList(cityItemList: [CityList.CityItemModel])
 }
 
 final class CityListViewController: UIViewController, CityListDisplayLogic {
@@ -23,6 +23,16 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     
     @IBOutlet private var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
+    private var cityModelList: [CityList.CityItemModel]? = []
+    private var filteredCities: [CityList.CityItemModel] = []
+    
+    var isSearchBarEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !isSearchBarEmpty
+    }
     
     // MARK: Object lifecycle
     
@@ -58,10 +68,15 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         
         registerTableView()
         setSearchViewController()
+        
+        interactor?.getCityList()
     }
     
     private func registerTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
     }
     
     private func setSearchViewController() {
@@ -75,21 +90,56 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         definesPresentationContext = true
     }
     
+    private func filterContentForSearchText(_ searchText: String,
+                                            category: CityList.CityItemModel? = nil) {
+        
+        filteredCities = (cityModelList?.filter({ item in
+            (item.name!.lowercased().contains(searchText.lowercased()))
+        }))!
+    }
+
+    func displayCityList(cityItemList: [CityList.CityItemModel]) {
+        cityModelList = cityItemList
+    }
 }
 
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if isFiltering {
+            guard let name = filteredCities[indexPath.row].name, let country = filteredCities[indexPath.row].countryName else {
+                return UITableViewCell()
+            }
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") {
+                let simpleItemView = SimpleItemView()
+                return cell
+            }
+        }
+        
+        guard let cityModelList = cityModelList, let name = cityModelList[indexPath.row].name, let country = cityModelList[indexPath.row].countryName else {
+            return UITableViewCell()
+        }
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") {
+            cell.textLabel?.text = name + ", " + country
+            return cell
+        }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if isFiltering {
+            return filteredCities.count
+        }
+        return cityModelList?.count ?? 0
     }
 }
 
 extension CityListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchBar.text!)
+        tableView.reloadData()
     }
 }
