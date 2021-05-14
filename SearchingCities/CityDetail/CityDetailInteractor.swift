@@ -13,13 +13,19 @@
 import UIKit
 
 protocol CityDetailBusinessLogic {
+    func getMapViewModel()
 }
 
 protocol CityDetailDataStore {
-  //var name: String { get set }
+    var mapViewModel: CityDetail.MapViewModel? { get set }
 }
 
-class CityDetailInteractor: CityDetailBusinessLogic, CityDetailDataStore {
-  var presenter: CityDetailPresentationLogic?
+final class CityDetailInteractor: CityDetailBusinessLogic, CityDetailDataStore {
 
+    var presenter: CityDetailPresentationLogic?
+    var mapViewModel: CityDetail.MapViewModel?
+    
+    func getMapViewModel() {
+        presenter?.presentCityDetail(with: mapViewModel)
+    }
 }

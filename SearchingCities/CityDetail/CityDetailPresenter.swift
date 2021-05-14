@@ -13,9 +13,13 @@
 import UIKit
 
 protocol CityDetailPresentationLogic {
+    func presentCityDetail(with viewModel: CityDetail.MapViewModel?)
 }
 
 final class CityDetailPresenter: CityDetailPresentationLogic {
   weak var viewController: CityDetailDisplayLogic?
   
+    func presentCityDetail(with viewModel: CityDetail.MapViewModel?) {
+        viewController?.displayCityDetail(with: viewModel)
+    }
 }

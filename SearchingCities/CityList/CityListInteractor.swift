@@ -27,17 +27,16 @@ final class CityListInteractor: CityListBusinessLogic, CityListDataStore {
     
     func getCityList() {
         
-        let url = Bundle.main.url(forResource: "cities", withExtension: "json")!
-        
-        do {
-            let jsonData = try Data(contentsOf: url)
-            parse(jsonData: jsonData)
-            print("yesim")
+        if let url = Bundle.main.url(forResource: "temp", withExtension: "json") {
+            do {
+                let jsonData = try Data(contentsOf: url)
+                parse(jsonData: jsonData)
+                print("yesim")
+            }
+            catch {
+                print(error)
+            }
         }
-        catch {
-            print(error)
-        }
-        
     }
     
     private func parse(jsonData: Data) {

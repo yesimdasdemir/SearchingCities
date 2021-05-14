@@ -33,14 +33,14 @@ enum CityList {
             case coordinate = "coord"
         }
     }
+}
 
-    struct CoordinateModel: Codable {
-        let latitude: Double?
-        let longitude: Double?
-        
-        private enum CodingKeys: String, CodingKey {
-            case latitude = "lat"
-            case longitude = "lon"
-        }
+struct CoordinateModel: Codable {
+    let latitude: Double?
+    let longitude: Double?
+    
+    private enum CodingKeys: String, CodingKey {
+        case latitude = "lat"
+        case longitude = "lon"
     }
 }

@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import MapKit
 
 protocol CityListDisplayLogic: AnyObject {
     func displayCityList(cityItemList: [CityList.CityItemModel])
@@ -65,6 +66,7 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         registerTableView()
         setSearchViewController()
@@ -97,7 +99,7 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
             (item.name!.lowercased().contains(searchText.lowercased()))
         }))!
     }
-
+    
     func displayCityList(cityItemList: [CityList.CityItemModel]) {
         cityModelList = cityItemList
     }
@@ -105,35 +107,79 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
 
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if isFiltering {
-            guard let name = filteredCities[indexPath.row].name, let country = filteredCities[indexPath.row].countryName else {
-                return UITableViewCell()
-            }
-            
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") {
-                let simpleItemView = SimpleItemView()
-                return cell
-            }
-        }
-        
-        guard let cityModelList = cityModelList, let name = cityModelList[indexPath.row].name, let country = cityModelList[indexPath.row].countryName else {
-            return UITableViewCell()
-        }
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") {
-            cell.textLabel?.text = name + ", " + country
-            return cell
-        }
-        return UITableViewCell()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredCities.count
         }
         return cityModelList?.count ?? 0
     }
+    // TODO: Refactor etmeyi unutma metodları ortaklastır
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") as? CustomTableViewCell {
+            let simpleItemView = SimpleItemView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 70))
+
+            if isFiltering {
+                let simpleItemViewModel = filteredCities.map { item -> SimpleItemViewModel in
+                    let title: String = item.name! + ", " + item.countryName!
+                    let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
+
+                    return SimpleItemViewModel(id: item.id,
+                                               title: title,
+                                               subTitle: subTitle)
+                }
+                simpleItemView.viewModel = simpleItemViewModel[indexPath.row]
+                cell.component = simpleItemView
+                return cell
+
+            } else {
+                let simpleItemViewModel = cityModelList!.map { item -> SimpleItemViewModel in
+                    let title: String = item.name! + ", " + item.countryName!
+                    let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
+
+                    return SimpleItemViewModel(id: item.id,
+                                               title: title,
+                                               subTitle: subTitle)
+                }
+                simpleItemView.viewModel = simpleItemViewModel[indexPath.row]
+                cell.component = simpleItemView
+                return cell            }
+        }
+        
+        return UITableViewCell()
+//        if isFiltering {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "deneme")
+//            cell?.textLabel?.text = filteredCities[indexPath.row].name
+//            return cell!
+//        }
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "deneme")
+//        cell?.textLabel?.text = cityModelList![indexPath.row].name
+//        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isFiltering {
+            let viewModel = filteredCities.map { item in
+                return CityDetail.MapViewModel(title: item.name ?? "City",
+                                               coordinate: CLLocationCoordinate2D(latitude: item.coordinate?.latitude ?? 51.5549,
+                                                                                  longitude: item.coordinate?.longitude ?? -0.108436),
+                                               info: "City Location")
+            }
+            router?.routeToCityDetail(viewModel: viewModel[indexPath.row])
+        } else {
+            if let cityModelList = cityModelList {
+                let viewModel = cityModelList.map { item in
+                    return CityDetail.MapViewModel(title: item.name ?? "City",
+                                                   coordinate: CLLocationCoordinate2D(latitude: item.coordinate?.latitude ?? 51.5549,
+                                                                                      longitude: item.coordinate?.longitude ?? -0.108436),
+                                                   info: "City Location")
+                }
+                router?.routeToCityDetail(viewModel: viewModel[indexPath.row])
+            }
+        }
+    }
+    
+    
 }
 
 extension CityListViewController: UISearchResultsUpdating {

@@ -12,15 +12,37 @@
 
 import UIKit
 
-@objc protocol CityListRoutingLogic {
+protocol CityListRoutingLogic {
+    func routeToCityDetail(viewModel: CityDetail.MapViewModel)
 }
 
 protocol CityListDataPassing {
-  var dataStore: CityListDataStore? { get }
+    var dataStore: CityListDataStore? { get }
 }
 
 final class CityListRouter: NSObject, CityListRoutingLogic, CityListDataPassing {
-  weak var viewController: CityListViewController?
-  var dataStore: CityListDataStore?
-  
+    weak var viewController: CityListViewController?
+    var dataStore: CityListDataStore?
+    
+    
+    func routeToCityDetail(viewModel: CityDetail.MapViewModel) {
+        let storyboard = UIStoryboard(name: "CityDetail", bundle: nil)
+        let destinationVC = storyboard.instantiateViewController(withIdentifier: "CityDetail") as! CityDetailViewController
+        var destinationDS = destinationVC.router!.dataStore!
+
+        passDataToCityDetail(viewModel: viewModel, source: dataStore!, destination: &destinationDS)
+        navigateToCityDetail(source: viewController!, destination: destinationVC)
+    }
+    
+    //   MARK: Navigation
+    
+    func navigateToCityDetail(source: CityListViewController, destination: CityDetailViewController) {
+        source.show(destination, sender: nil)
+    }
+    
+    //   MARK: Passing data
+    
+    func passDataToCityDetail(viewModel: CityDetail.MapViewModel, source: CityListDataStore, destination: inout CityDetailDataStore) {
+        destination.mapViewModel = viewModel
+    }
 }

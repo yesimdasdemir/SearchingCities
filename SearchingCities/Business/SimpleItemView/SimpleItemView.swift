@@ -9,6 +9,7 @@ import UIKit
 
 final class SimpleItemView: UIView {
     @IBOutlet private var contentView: UIView!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTitleLabel: UILabel!
     
@@ -39,6 +40,11 @@ final class SimpleItemView: UIView {
         if let subTitle: String = viewModel.subTitle {
             subTitleLabel.text = subTitle
         }
+        
+        contentView.layer.borderWidth = 2
+        contentView.layer.cornerRadius = 8.0
+        contentView.layer.masksToBounds = true
+        contentView.layer.borderColor = UIColor.purple.cgColor
     }
     
     // MARK: LoadNib
@@ -51,5 +57,14 @@ final class SimpleItemView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         addSubview(contentView)
+        
+        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
+        
     }
 }

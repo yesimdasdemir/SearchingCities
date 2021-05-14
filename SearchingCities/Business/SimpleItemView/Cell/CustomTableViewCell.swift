@@ -8,22 +8,25 @@
 import UIKit
 
 final class CustomTableViewCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     var component: UIView? {
         didSet {
-            removeFromSuperview()
+            for view in subviews {
+                view.removeFromSuperview()
+            }
             
             guard let component = component else {
                 return
             }
-            
+            self.frame = bounds
+            self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(component)
         }
     }
-
+    
 }
