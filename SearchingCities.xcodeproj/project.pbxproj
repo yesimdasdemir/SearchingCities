@@ -29,7 +29,37 @@
 		24DB7F0A264CB0C000487696 /* SimpleItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7F09264CB0C000487696 /* SimpleItemViewModel.swift */; };
 		24DB7F0E264CB27B00487696 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7F0C264CB27B00487696 /* CustomTableViewCell.swift */; };
 		24DB7F0F264CB27B00487696 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24DB7F0D264CB27B00487696 /* CustomTableViewCell.xib */; };
+		24F31E62264FFCD4007E2B6D /* SearchingCitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E61264FFCD4007E2B6D /* SearchingCitiesTests.swift */; };
+		24F31E69264FFCD7007E2B6D /* CityListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E4E264FFB7B007E2B6D /* CityListPresenterTests.swift */; };
+		24F31E6A264FFCE0007E2B6D /* CityListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E4B264FFB7B007E2B6D /* CityListViewControllerTests.swift */; };
+		24F31E6B264FFCE2007E2B6D /* CityListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E4C264FFB7B007E2B6D /* CityListInteractorTests.swift */; };
+		24F31E6C264FFCE7007E2B6D /* CityDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E53264FFB8E007E2B6D /* CityDetailViewControllerTests.swift */; };
+		24F31E6D264FFCE9007E2B6D /* CityDetailInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E54264FFB8E007E2B6D /* CityDetailInteractorTests.swift */; };
+		24F31E6E264FFCEB007E2B6D /* CityDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F31E56264FFB8E007E2B6D /* CityDetailPresenterTests.swift */; };
+		24F31E6F264FFD30007E2B6D /* CityListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EF4264C91FA00487696 /* CityListInteractor.swift */; };
+		24F31E70264FFD35007E2B6D /* CityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EF3264C91FA00487696 /* CityListViewController.swift */; };
+		24F31E71264FFD37007E2B6D /* CityListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EF2264C91FA00487696 /* CityListModels.swift */; };
+		24F31E72264FFD3B007E2B6D /* CityListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EEF264C91FA00487696 /* CityListPresenter.swift */; };
+		24F31E73264FFD42007E2B6D /* CityListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EF1264C91FA00487696 /* CityListRouter.swift */; };
+		24F31E74264FFD4F007E2B6D /* CityDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EFB264C920F00487696 /* CityDetailPresenter.swift */; };
+		24F31E75264FFD51007E2B6D /* CityDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EFD264C920F00487696 /* CityDetailRouter.swift */; };
+		24F31E76264FFD53007E2B6D /* CityDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EFE264C920F00487696 /* CityDetailModels.swift */; };
+		24F31E77264FFD55007E2B6D /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7EFF264C920F00487696 /* CityDetailViewController.swift */; };
+		24F31E78264FFD57007E2B6D /* CityDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7F00264C920F00487696 /* CityDetailInteractor.swift */; };
+		24F31E79264FFD98007E2B6D /* SimpleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2462C7F3264C8BC70088D561 /* SimpleItemView.swift */; };
+		24F31E7A264FFDA8007E2B6D /* SimpleItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7F09264CB0C000487696 /* SimpleItemViewModel.swift */; };
+		24F31E7B264FFE14007E2B6D /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DB7F0C264CB27B00487696 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24F31E64264FFCD4007E2B6D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24B0A60B264B089900BDAA62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 24B0A612264B089900BDAA62;
+			remoteInfo = SearchingCities;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		240EEFF1264EF55A00A244E5 /* CityDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CityDetail.storyboard; sourceTree = "<group>"; };
@@ -56,10 +86,26 @@
 		24DB7F09264CB0C000487696 /* SimpleItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleItemViewModel.swift; sourceTree = "<group>"; };
 		24DB7F0C264CB27B00487696 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		24DB7F0D264CB27B00487696 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		24F31E4B264FFB7B007E2B6D /* CityListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewControllerTests.swift; sourceTree = "<group>"; };
+		24F31E4C264FFB7B007E2B6D /* CityListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListInteractorTests.swift; sourceTree = "<group>"; };
+		24F31E4E264FFB7B007E2B6D /* CityListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListPresenterTests.swift; sourceTree = "<group>"; };
+		24F31E53264FFB8E007E2B6D /* CityDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewControllerTests.swift; sourceTree = "<group>"; };
+		24F31E54264FFB8E007E2B6D /* CityDetailInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailInteractorTests.swift; sourceTree = "<group>"; };
+		24F31E56264FFB8E007E2B6D /* CityDetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailPresenterTests.swift; sourceTree = "<group>"; };
+		24F31E5F264FFCD4007E2B6D /* SearchingCitiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchingCitiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		24F31E61264FFCD4007E2B6D /* SearchingCitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingCitiesTests.swift; sourceTree = "<group>"; };
+		24F31E63264FFCD4007E2B6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		24B0A610264B089900BDAA62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24F31E5C264FFCD4007E2B6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				24B0A615264B089900BDAA62 /* SearchingCities */,
+				24F31E60264FFCD4007E2B6D /* SearchingCitiesTests */,
 				24B0A614264B089900BDAA62 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				24B0A613264B089900BDAA62 /* SearchingCities.app */,
+				24F31E5F264FFCD4007E2B6D /* SearchingCitiesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,6 +158,7 @@
 				24DB7EEC264C916B00487696 /* CityList */,
 				24DB7EEE264C917B00487696 /* CityDetail */,
 				2462C7F1264C8B360088D561 /* Business */,
+				24F31E3E264FFABA007E2B6D /* UnitTests */,
 				24B0A616264B089900BDAA62 /* AppDelegate.swift */,
 				24B0A618264B089900BDAA62 /* SceneDelegate.swift */,
 				24B0A61F264B089A00BDAA62 /* Assets.xcassets */,
@@ -155,6 +204,44 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		24F31E3E264FFABA007E2B6D /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				24F31E49264FFB50007E2B6D /* CityListUnitTests */,
+				24F31E4A264FFB5B007E2B6D /* CityDetailUnitTests */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		24F31E49264FFB50007E2B6D /* CityListUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				24F31E4B264FFB7B007E2B6D /* CityListViewControllerTests.swift */,
+				24F31E4C264FFB7B007E2B6D /* CityListInteractorTests.swift */,
+				24F31E4E264FFB7B007E2B6D /* CityListPresenterTests.swift */,
+			);
+			path = CityListUnitTests;
+			sourceTree = "<group>";
+		};
+		24F31E4A264FFB5B007E2B6D /* CityDetailUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				24F31E53264FFB8E007E2B6D /* CityDetailViewControllerTests.swift */,
+				24F31E54264FFB8E007E2B6D /* CityDetailInteractorTests.swift */,
+				24F31E56264FFB8E007E2B6D /* CityDetailPresenterTests.swift */,
+			);
+			path = CityDetailUnitTests;
+			sourceTree = "<group>";
+		};
+		24F31E60264FFCD4007E2B6D /* SearchingCitiesTests */ = {
+			isa = PBXGroup;
+			children = (
+				24F31E61264FFCD4007E2B6D /* SearchingCitiesTests.swift */,
+				24F31E63264FFCD4007E2B6D /* Info.plist */,
+			);
+			path = SearchingCitiesTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -175,6 +262,24 @@
 			productReference = 24B0A613264B089900BDAA62 /* SearchingCities.app */;
 			productType = "com.apple.product-type.application";
 		};
+		24F31E5E264FFCD4007E2B6D /* SearchingCitiesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24F31E66264FFCD4007E2B6D /* Build configuration list for PBXNativeTarget "SearchingCitiesTests" */;
+			buildPhases = (
+				24F31E5B264FFCD4007E2B6D /* Sources */,
+				24F31E5C264FFCD4007E2B6D /* Frameworks */,
+				24F31E5D264FFCD4007E2B6D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24F31E65264FFCD4007E2B6D /* PBXTargetDependency */,
+			);
+			name = SearchingCitiesTests;
+			productName = SearchingCitiesTests;
+			productReference = 24F31E5F264FFCD4007E2B6D /* SearchingCitiesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -186,6 +291,10 @@
 				TargetAttributes = {
 					24B0A612264B089900BDAA62 = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					24F31E5E264FFCD4007E2B6D = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 24B0A612264B089900BDAA62;
 					};
 				};
 			};
@@ -203,6 +312,7 @@
 			projectRoot = "";
 			targets = (
 				24B0A612264B089900BDAA62 /* SearchingCities */,
+				24F31E5E264FFCD4007E2B6D /* SearchingCitiesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -219,6 +329,13 @@
 				2462C7F6264C8BD30088D561 /* SimpleItemView.xib in Resources */,
 				24B0A620264B089A00BDAA62 /* Assets.xcassets in Resources */,
 				24B0A61E264B089900BDAA62 /* CityList.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24F31E5D264FFCD4007E2B6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +364,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24F31E5B264FFCD4007E2B6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24F31E75264FFD51007E2B6D /* CityDetailRouter.swift in Sources */,
+				24F31E6C264FFCE7007E2B6D /* CityDetailViewControllerTests.swift in Sources */,
+				24F31E6A264FFCE0007E2B6D /* CityListViewControllerTests.swift in Sources */,
+				24F31E6E264FFCEB007E2B6D /* CityDetailPresenterTests.swift in Sources */,
+				24F31E77264FFD55007E2B6D /* CityDetailViewController.swift in Sources */,
+				24F31E7A264FFDA8007E2B6D /* SimpleItemViewModel.swift in Sources */,
+				24F31E7B264FFE14007E2B6D /* CustomTableViewCell.swift in Sources */,
+				24F31E6F264FFD30007E2B6D /* CityListInteractor.swift in Sources */,
+				24F31E78264FFD57007E2B6D /* CityDetailInteractor.swift in Sources */,
+				24F31E71264FFD37007E2B6D /* CityListModels.swift in Sources */,
+				24F31E6D264FFCE9007E2B6D /* CityDetailInteractorTests.swift in Sources */,
+				24F31E79264FFD98007E2B6D /* SimpleItemView.swift in Sources */,
+				24F31E62264FFCD4007E2B6D /* SearchingCitiesTests.swift in Sources */,
+				24F31E69264FFCD7007E2B6D /* CityListPresenterTests.swift in Sources */,
+				24F31E72264FFD3B007E2B6D /* CityListPresenter.swift in Sources */,
+				24F31E76264FFD53007E2B6D /* CityDetailModels.swift in Sources */,
+				24F31E73264FFD42007E2B6D /* CityListRouter.swift in Sources */,
+				24F31E6B264FFCE2007E2B6D /* CityListInteractorTests.swift in Sources */,
+				24F31E74264FFD4F007E2B6D /* CityDetailPresenter.swift in Sources */,
+				24F31E70264FFD35007E2B6D /* CityListViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24F31E65264FFCD4007E2B6D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 24B0A612264B089900BDAA62 /* SearchingCities */;
+			targetProxy = 24F31E64264FFCD4007E2B6D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		24B0A61C264B089900BDAA62 /* CityList.storyboard */ = {
@@ -425,6 +577,44 @@
 			};
 			name = Release;
 		};
+		24F31E67264FFCD4007E2B6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SearchingCitiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yesim.dasdemir.SearchingCitiesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SearchingCities.app/SearchingCities";
+			};
+			name = Debug;
+		};
+		24F31E68264FFCD4007E2B6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SearchingCitiesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yesim.dasdemir.SearchingCitiesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SearchingCities.app/SearchingCities";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -442,6 +632,15 @@
 			buildConfigurations = (
 				24B0A628264B089A00BDAA62 /* Debug */,
 				24B0A629264B089A00BDAA62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24F31E66264FFCD4007E2B6D /* Build configuration list for PBXNativeTarget "SearchingCitiesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24F31E67264FFCD4007E2B6D /* Debug */,
+				24F31E68264FFCD4007E2B6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
