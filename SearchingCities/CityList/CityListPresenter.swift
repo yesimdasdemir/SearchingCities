@@ -18,20 +18,41 @@ protocol CityListPresentationLogic {
 
 final class CityListPresenter: CityListPresentationLogic {
     
-  weak var viewController: CityListDisplayLogic?
-
+    weak var viewController: CityListDisplayLogic?
+    
+    private var title: String = ""
+    private var subTitle: String = ""
+    
     func presentCityList(cityItemList: [CityList.CityItemModel]) {
         let sortedItemList = cityItemList.sorted {
             guard let first = $0.name else {
                 return false
             }
+            
             guard let second = $1.name else {
                 return true
             }
-
+            
             return first.localizedCaseInsensitiveCompare(second) == ComparisonResult.orderedAscending
         }
         
-        viewController?.displayCityList(cityItemList: sortedItemList)
+        let simpleItemList = presentMapModel(viewModel: sortedItemList)
+        viewController?.displayCityList(simpleItemModelList: simpleItemList, cityItemList: cityItemList)
+    }
+    
+    private func presentMapModel(viewModel: [CityList.CityItemModel]) -> [SimpleItemViewModel] {
+        return viewModel.map { item -> SimpleItemViewModel in
+            if let name: String = item.name, let countyName: String = item.countryName {
+                title = name + ", " + countyName
+            }
+            
+            if let latitude: Double = item.coordinate?.latitude, let longitude: Double = item.coordinate?.longitude {
+                subTitle = String(latitude) + ", " + String(longitude)
+            }
+            
+            return SimpleItemViewModel(id: item.id,
+                                       title: title,
+                                       subTitle: subTitle)
+        }
     }
 }

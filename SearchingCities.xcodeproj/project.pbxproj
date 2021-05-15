@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240EEFF2264EF55A00A244E5 /* CityDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 240EEFF1264EF55A00A244E5 /* CityDetail.storyboard */; };
 		2462C7F4264C8BC70088D561 /* SimpleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2462C7F3264C8BC70088D561 /* SimpleItemView.swift */; };
 		2462C7F6264C8BD30088D561 /* SimpleItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2462C7F5264C8BD30088D561 /* SimpleItemView.xib */; };
 		24B0A617264B089900BDAA62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B0A616264B089900BDAA62 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		240EEFF1264EF55A00A244E5 /* CityDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CityDetail.storyboard; sourceTree = "<group>"; };
 		2462C7F3264C8BC70088D561 /* SimpleItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleItemView.swift; sourceTree = "<group>"; };
 		2462C7F5264C8BD30088D561 /* SimpleItemView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleItemView.xib; sourceTree = "<group>"; };
 		24B0A613264B089900BDAA62 /* SearchingCities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchingCities.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				24DB7EFE264C920F00487696 /* CityDetailModels.swift */,
 				24DB7EFF264C920F00487696 /* CityDetailViewController.swift */,
 				24DB7F00264C920F00487696 /* CityDetailInteractor.swift */,
+				240EEFF1264EF55A00A244E5 /* CityDetail.storyboard */,
 			);
 			path = CityDetail;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240EEFF2264EF55A00A244E5 /* CityDetail.storyboard in Resources */,
 				24B0A623264B089A00BDAA62 /* LaunchScreen.storyboard in Resources */,
 				24DB7F08264C94AF00487696 /* cities.json in Resources */,
 				24DB7F0F264CB27B00487696 /* CustomTableViewCell.xib in Resources */,
@@ -387,6 +391,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6VT5RCHWQ;
 				INFOPLIST_FILE = SearchingCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +411,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6VT5RCHWQ;
 				INFOPLIST_FILE = SearchingCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (

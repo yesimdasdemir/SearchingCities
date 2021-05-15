@@ -27,11 +27,10 @@ final class CityListInteractor: CityListBusinessLogic, CityListDataStore {
     
     func getCityList() {
         
-        if let url = Bundle.main.url(forResource: "temp", withExtension: "json") {
+        if let url = Bundle.main.url(forResource: "cities", withExtension: "json") {
             do {
                 let jsonData = try Data(contentsOf: url)
-                parse(jsonData: jsonData)
-                print("yesim")
+                presenter?.presentCityList(cityItemList: parse(jsonData: jsonData))
             }
             catch {
                 print(error)
@@ -39,14 +38,13 @@ final class CityListInteractor: CityListBusinessLogic, CityListDataStore {
         }
     }
     
-    private func parse(jsonData: Data) {
+    private func parse(jsonData: Data) -> [CityList.CityItemModel] {
         do {
-            let cityItemList = try JSONDecoder().decode([CityList.CityItemModel].self, from: jsonData)
-            
-            presenter?.presentCityList(cityItemList: cityItemList)
             debugPrint("decoded successfully")
+            return  try JSONDecoder().decode([CityList.CityItemModel].self, from: jsonData)
         } catch {
             print("error: \(error)")
+            return []
         }
     }
 }

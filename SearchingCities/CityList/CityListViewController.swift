@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol CityListDisplayLogic: AnyObject {
-    func displayCityList(cityItemList: [CityList.CityItemModel])
+    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel])
 }
 
 final class CityListViewController: UIViewController, CityListDisplayLogic {
@@ -24,8 +24,16 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     
     @IBOutlet private var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
-    private var cityModelList: [CityList.CityItemModel]? = []
-    private var filteredCities: [CityList.CityItemModel] = []
+    private var simpleItemModelList: [SimpleItemViewModel] = []
+    private var cityModelList: [CityList.CityItemModel] = []
+    private var filtered2Cities: [CityList.CityItemModel] = []
+    private var filteredCities: [SimpleItemViewModel] = []
+    private var lowerCaseCities: [CityList.CityItemModel] = []
+    private let customCellHeight: CGFloat = 70.0
+    
+    private var lowerSearchText: String {
+        return searchController.searchBar.text?.lowercased() ?? ""
+    }
     
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -70,7 +78,6 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         
         registerTableView()
         setSearchViewController()
-        
         interactor?.getCityList()
     }
     
@@ -95,12 +102,22 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     private func filterContentForSearchText(_ searchText: String,
                                             category: CityList.CityItemModel? = nil) {
         
-        filteredCities = (cityModelList?.filter({ item in
-            (item.name!.lowercased().contains(searchText.lowercased()))
-        }))!
+        filtered2Cities = cityModelList.filter({ item in
+            item.name!.lowercased().contains(searchText.lowercased())
+        })
+        
+        filteredCities = filtered2Cities.map({ item in
+            let title: String = item.name! + ", " + item.countryName!
+            let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
+            
+            return SimpleItemViewModel(id: item.id,
+                                       title: title,
+                                       subTitle: subTitle)
+        })
     }
     
-    func displayCityList(cityItemList: [CityList.CityItemModel]) {
+    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel]) {
+        self.simpleItemModelList = simpleItemModelList
         cityModelList = cityItemList
     }
 }
@@ -108,78 +125,56 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
 extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredCities.count
-        }
-        return cityModelList?.count ?? 0
+        return isFiltering ? filteredCities.count : cityModelList.count
     }
-    // TODO: Refactor etmeyi unutma metodları ortaklastır
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") as? CustomTableViewCell {
-            let simpleItemView = SimpleItemView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 70))
-
-            if isFiltering {
-                let simpleItemViewModel = filteredCities.map { item -> SimpleItemViewModel in
-                    let title: String = item.name! + ", " + item.countryName!
-                    let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
-
-                    return SimpleItemViewModel(id: item.id,
-                                               title: title,
-                                               subTitle: subTitle)
-                }
-                simpleItemView.viewModel = simpleItemViewModel[indexPath.row]
-                cell.component = simpleItemView
-                return cell
-
-            } else {
-                let simpleItemViewModel = cityModelList!.map { item -> SimpleItemViewModel in
-                    let title: String = item.name! + ", " + item.countryName!
-                    let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
-
-                    return SimpleItemViewModel(id: item.id,
-                                               title: title,
-                                               subTitle: subTitle)
-                }
-                simpleItemView.viewModel = simpleItemViewModel[indexPath.row]
-                cell.component = simpleItemView
-                return cell            }
+            let simpleItemView = SimpleItemView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: customCellHeight))
+            simpleItemView.viewModel = isFiltering ? filteredCities[indexPath.row] : simpleItemModelList[indexPath.row]
+            cell.component = simpleItemView
+            return cell
         }
-        
         return UITableViewCell()
-//        if isFiltering {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "deneme")
-//            cell?.textLabel?.text = filteredCities[indexPath.row].name
-//            return cell!
-//        }
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "deneme")
-//        cell?.textLabel?.text = cityModelList![indexPath.row].name
-//        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isFiltering {
-            let viewModel = filteredCities.map { item in
-                return CityDetail.MapViewModel(title: item.name ?? "City",
-                                               coordinate: CLLocationCoordinate2D(latitude: item.coordinate?.latitude ?? 51.5549,
-                                                                                  longitude: item.coordinate?.longitude ?? -0.108436),
-                                               info: "City Location")
-            }
-            router?.routeToCityDetail(viewModel: viewModel[indexPath.row])
-        } else {
-            if let cityModelList = cityModelList {
-                let viewModel = cityModelList.map { item in
-                    return CityDetail.MapViewModel(title: item.name ?? "City",
-                                                   coordinate: CLLocationCoordinate2D(latitude: item.coordinate?.latitude ?? 51.5549,
-                                                                                      longitude: item.coordinate?.longitude ?? -0.108436),
-                                                   info: "City Location")
-                }
-                router?.routeToCityDetail(viewModel: viewModel[indexPath.row])
-            }
-        }
+        let cityViewModel: CityList.CityItemModel = isFiltering ? filtered2Cities[indexPath.row] : cityModelList[indexPath.row]
+        let mapViewModel: CityDetail.MapViewModel = getMapViewModel(viewModel: cityViewModel)
+        
+        router?.routeToCityDetail(viewModel: mapViewModel)
     }
     
+    private func getMapViewModel(viewModel: CityList.CityItemModel) -> CityDetail.MapViewModel {
+        return CityDetail.MapViewModel(title: viewModel.name ?? "City",
+                                       coordinate: CLLocationCoordinate2D(latitude: viewModel.coordinate?.latitude ?? 51.5549,
+                                                                          longitude: viewModel.coordinate?.longitude ?? -0.108436),
+                                       info: "City Location")
+        
+    }
     
+    func binarySearch<T:Comparable>(_ inputArr:Array<T>, _ searchItem: T) {
+        var lowerIndex = 0
+        var upperIndex = inputArr.count - 1
+        
+        while (true) {
+            let currentIndex = (lowerIndex + upperIndex)/2
+            let value: String = inputArr[currentIndex] as? String ?? ""
+            
+            if (value.firstIndex(of: searchItem as! String.Element) != nil) {
+                
+            } else if (lowerIndex > upperIndex) {
+            } else {
+                if (inputArr[currentIndex] > searchItem) {
+                    upperIndex = currentIndex - 1
+                } else {
+                    lowerIndex = currentIndex + 1
+                }
+            }
+            
+            //            filteredCities = cityModelList.filter({ $0.name == inputArr[currentIndex] })
+        }
+    }
 }
 
 extension CityListViewController: UISearchResultsUpdating {
