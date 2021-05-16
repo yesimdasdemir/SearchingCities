@@ -37,7 +37,7 @@ final class CityDetailViewControllerTests: XCTestCase {
     func setupCityDetailViewController() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "CityDetail", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier: "CityDetailViewController") as! CityDetailViewController
+        sut = storyboard.instantiateViewController(withIdentifier: "CityDetailViewController") as? CityDetailViewController
     }
     
     func loadView() {

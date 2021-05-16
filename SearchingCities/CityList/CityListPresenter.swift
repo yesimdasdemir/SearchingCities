@@ -37,7 +37,14 @@ final class CityListPresenter: CityListPresentationLogic {
         }
         
         let simpleItemList = presentMapModel(viewModel: sortedItemList)
-        viewController?.displayCityList(simpleItemModelList: simpleItemList, cityItemList: cityItemList)
+        let contentViewModel: ContentViewModel = ContentViewModel(borderWidth: 2.0,
+                                                                  borderColor: UIColor.purple.cgColor,
+                                                                  cornerRadius: 8.0,
+                                                                  leadingTrailingPadding: 16,
+                                                                  topBottomPadding: 5)
+        viewController?.displayCityList(simpleItemModelList: simpleItemList,
+                                        cityItemList: cityItemList,
+                                        contentViewModel: contentViewModel)
     }
     
     private func presentMapModel(viewModel: [CityList.CityItemModel]) -> [SimpleItemViewModel] {

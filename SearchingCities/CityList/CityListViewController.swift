@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol CityListDisplayLogic: AnyObject {
-    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel])
+    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel], contentViewModel: ContentViewModel?)
 }
 
 final class CityListViewController: UIViewController, CityListDisplayLogic {
@@ -25,11 +25,14 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     @IBOutlet private var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
     private var simpleItemModelList: [SimpleItemViewModel] = []
+    private var contentViewModel: ContentViewModel?
     private var cityModelList: [CityList.CityItemModel] = []
     private var filtered2Cities: [CityList.CityItemModel] = []
     private var filteredCities: [SimpleItemViewModel] = []
     private var lowerCaseCities: [CityList.CityItemModel] = []
     private let customCellHeight: CGFloat = 70.0
+    
+//    private var searchManager = SearchManager()
     
     private var lowerSearchText: String {
         return searchController.searchBar.text?.lowercased() ?? ""
@@ -116,9 +119,10 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         })
     }
     
-    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel]) {
+    func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel], contentViewModel: ContentViewModel?) {
         self.simpleItemModelList = simpleItemModelList
         cityModelList = cityItemList
+        self.contentViewModel = contentViewModel
     }
 }
 
@@ -131,7 +135,9 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell") as? CustomTableViewCell {
             let simpleItemView = SimpleItemView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: customCellHeight))
+            simpleItemView.contentViewModel = contentViewModel
             simpleItemView.viewModel = isFiltering ? filteredCities[indexPath.row] : simpleItemModelList[indexPath.row]
+            
             cell.component = simpleItemView
             return cell
         }
@@ -152,29 +158,6 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
                                        info: "City Location")
         
     }
-    
-    func binarySearch<T:Comparable>(_ inputArr:Array<T>, _ searchItem: T) {
-        var lowerIndex = 0
-        var upperIndex = inputArr.count - 1
-        
-        while (true) {
-            let currentIndex = (lowerIndex + upperIndex)/2
-            let value: String = inputArr[currentIndex] as? String ?? ""
-            
-            if (value.firstIndex(of: searchItem as! String.Element) != nil) {
-                
-            } else if (lowerIndex > upperIndex) {
-            } else {
-                if (inputArr[currentIndex] > searchItem) {
-                    upperIndex = currentIndex - 1
-                } else {
-                    lowerIndex = currentIndex + 1
-                }
-            }
-            
-            //            filteredCities = cityModelList.filter({ $0.name == inputArr[currentIndex] })
-        }
-    }
 }
 
 extension CityListViewController: UISearchResultsUpdating {
@@ -184,3 +167,122 @@ extension CityListViewController: UISearchResultsUpdating {
         tableView.reloadData()
     }
 }
+
+//    class SearchManager {
+//
+//        private var cities: [String] = []
+//        private var filterStart: Int = 0
+//        private var filterEnd: Int = 0
+//
+//        init() {
+//            if let url = Bundle.main.url(forResource: "cities", withExtension: "json") {
+//                do {
+//                    let jsonData = try Data(contentsOf: url)
+//
+//                    cities = parse(jsonData: jsonData).map({$0.name ?? ""})
+//                }
+//                catch {
+//                    print(error)
+//                }
+//            }
+//
+//
+//            filterStart = 0
+//            filterEnd = cities.count - 1
+//        }
+//
+//        private func parse(jsonData: Data) -> [CityList.CityItemModel] {
+//            do {
+//                debugPrint("decoded successfully")
+//                return  try JSONDecoder().decode([CityList.CityItemModel].self, from: jsonData)
+//            } catch {
+//                print("error: \(error)")
+//                return []
+//            }
+//        }
+//
+//
+//        func filteredCityCount() -> Int {
+//            if filterStart == -1 {
+//                return 0
+//            }
+//
+//            return filterEnd - filterStart + 1
+//        }
+//
+//        func filteredCitiesAtIndex(index: Int) -> String {
+//            return cities[filterStart + index]
+//        }
+//
+//        func binarySearchLast(array: [String], target: String) -> Int {
+//            var left = 0
+//            var right = array.count - 1
+//
+//            while (left <= right) {
+//                let mid = (left + right) / 2
+//                let value = array[mid]
+//
+//                if (left == right && value.hasPrefix(target)) {
+//                    return left
+//                }
+//
+//                if value.hasPrefix(target) {
+//                    if mid < array.count - 1 {
+//                        if !array[mid + 1].hasPrefix(target) {
+//                            return mid
+//                        }
+//                    }
+//
+//                    left = mid + 1
+//                } else if (value < target) {
+//                    left = mid + 1
+//                } else if (value > target) {
+//                    right = mid - 1
+//                }
+//            }
+//
+//            return -1
+//        }
+//
+//        func binarySearchFirst(array: [String], target: String) -> Int {
+//            var left = 0
+//            var right = array.count - 1
+//
+//            while (left <= right) {
+//                let mid = (left + right) / 2
+//                let value = array[mid]
+//
+//                if (left == right && value.hasPrefix(target)) {
+//                    return left
+//                }
+//
+//                if value.hasPrefix(target) {
+//                    if mid > 0 {
+//                        if !array[mid - 1].hasPrefix(target) {
+//                            return mid
+//                        }
+//                    }
+//                    right = mid - 1
+//                } else if (value < target) {
+//                    left = mid + 1
+//                } else if (value > target) {
+//                    right = mid - 1
+//                }
+//            }
+//
+//            return -1
+//        }
+//
+//
+//        func updateFilter(filter: String) {
+//
+//            if filter == "" {
+//                filterStart = 0
+//                filterEnd = cities.count - 1
+//                return
+//            }
+//
+//            filterStart = binarySearchFirst(array: cities, target: filter)
+//            filterEnd = binarySearchLast(array: cities, target: filter)
+//        }
+//    }

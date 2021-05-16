@@ -35,8 +35,8 @@ class CityListViewControllerTests: XCTestCase {
     
     func setupCityListViewController() {
         let bundle = Bundle.main
-        let storyboard = UIStoryboard(name: "Main", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier: "CityListViewController") as! CityListViewController
+        let storyboard = UIStoryboard(name: "CityList", bundle: bundle)
+        sut = storyboard.instantiateViewController(withIdentifier: "CityListViewController") as? CityListViewController
     }
     
     func loadView() {
@@ -65,15 +65,5 @@ class CityListViewControllerTests: XCTestCase {
         loadView()
         
         // Then
-    }
-    
-    func testDisplaySomething() {
-        // Given
-        
-        // When
-        loadView()
-        
-        // Then
-        //XCTAssertEqual(sut.nameTextField.text, "", "displaySomething(viewModel:) should update the name text field")
     }
 }

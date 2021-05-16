@@ -32,6 +32,27 @@ final class SimpleItemView: UIView {
         }
     }
     
+    var contentViewModel: ContentViewModel? {
+        didSet {
+            guard let contentViewModel = contentViewModel else {
+                return
+            }
+            
+            contentView.layer.borderWidth = contentViewModel.borderWidth ?? 0
+            contentView.layer.cornerRadius = contentViewModel.cornerRadius ?? 8.0
+            contentView.layer.masksToBounds = true
+            contentView.layer.borderColor = contentViewModel.borderColor
+            
+            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: contentViewModel.leadingTrailingPadding ?? 0).isActive = true
+            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -(contentViewModel.leadingTrailingPadding ?? 0)).isActive = true
+            contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: contentViewModel.topBottomPadding ?? 0).isActive = true
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -(contentViewModel.topBottomPadding ?? 0)).isActive = true
+            
+            contentView.setNeedsLayout()
+            contentView.layoutIfNeeded()
+        }
+    }
+    
     private func initView(viewModel: SimpleItemViewModel) {
         if let title: String = viewModel.title {
             titleLabel.text = title
@@ -40,11 +61,6 @@ final class SimpleItemView: UIView {
         if let subTitle: String = viewModel.subTitle {
             subTitleLabel.text = subTitle
         }
-        
-        contentView.layer.borderWidth = 2
-        contentView.layer.cornerRadius = 8.0
-        contentView.layer.masksToBounds = true
-        contentView.layer.borderColor = UIColor.purple.cgColor
     }
     
     // MARK: LoadNib
@@ -57,14 +73,5 @@ final class SimpleItemView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         addSubview(contentView)
-        
-        contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        contentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-        
-        contentView.setNeedsLayout()
-        contentView.layoutIfNeeded()
-        
     }
 }

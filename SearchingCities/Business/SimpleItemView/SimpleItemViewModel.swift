@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct SimpleItemViewModel {
     let id: Int?
@@ -18,3 +19,25 @@ struct SimpleItemViewModel {
         self.subTitle = subTitle
     }
 }
+
+struct ContentViewModel {
+    let borderWidth: CGFloat?
+    let borderColor: CGColor?
+    let cornerRadius: CGFloat?
+    let leadingTrailingPadding: CGFloat?
+    let topBottomPadding: CGFloat?
+    
+    init(borderWidth: CGFloat? = nil,
+         borderColor: CGColor? = nil,
+         cornerRadius: CGFloat? = nil,
+         leadingTrailingPadding: CGFloat? = nil,
+         topBottomPadding: CGFloat? = nil) {
+        
+        self.borderWidth = borderWidth
+        self.borderColor = borderColor
+        self.cornerRadius = cornerRadius
+        self.leadingTrailingPadding = leadingTrailingPadding
+        self.topBottomPadding = topBottomPadding
+    }
+}
+
