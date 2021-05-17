@@ -1,0 +1,15 @@
+
+This project was written by using Clean Swift architecture.
+Json data converted to Custom models in order to help mapping for custom component models.
+
+There are two basic folder for listing and detail.
+Getting data and parse operations were done in CityListInteractor.
+Converting data into custom models were done in CityListPresenter.
+Routing detail page code is in CityListRouting.
+
+CityDetailViewController responsible for open map with coordinateModel.
+
+Custom components were used for listing cities.
+
+Binary search algorithm was used for searching. SearchManager is responsible for all method about filtering.
+
