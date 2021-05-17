@@ -22,14 +22,14 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     var interactor: CityListBusinessLogic?
     var router: (NSObjectProtocol & CityListRoutingLogic & CityListDataPassing)?
     
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     private let searchController = UISearchController(searchResultsController: nil)
-    private var simpleItemModelList: [SimpleItemViewModel] = []
+    private(set) var simpleItemModelList: [SimpleItemViewModel] = []
     private var contentViewModel: ContentViewModel?
     private var cityModelList: [CityList.CityItemModel] = []
     private let customCellHeight: CGFloat = 70.0
     
-    private var searchManager = SearchManager()
+    private(set) var searchManager = SearchManager()
 
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -77,7 +77,7 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         interactor?.getCityList()
     }
     
-    private func registerTableView() {
+    func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         

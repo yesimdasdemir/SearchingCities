@@ -12,7 +12,7 @@
 
 import XCTest
 
-class CityListViewControllerTests: XCTestCase {
+class CityListViewControllerTests: XCTestCase, UISearchControllerDelegate {
     // MARK: Subject under test
     
     var sut: CityListViewController!
@@ -36,7 +36,7 @@ class CityListViewControllerTests: XCTestCase {
     func setupCityListViewController() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "CityList", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier: "CityListViewController") as? CityListViewController
+        sut = storyboard.instantiateViewController(withIdentifier: "CityList") as? CityListViewController
     }
     
     func loadView() {
@@ -54,5 +54,50 @@ class CityListViewControllerTests: XCTestCase {
         }
     }
     
+    
+    class CityListRoutingLogicSpy: CityListRoutingLogic {
+        var routeToCityDetailCalled = false
+        
+        func routeToCityDetail(viewModel: CityDetail.MapViewModel) {
+            routeToCityDetailCalled = true
+        }
+    }
+
     // MARK: Tests
+    
+    func testUpdateSearchResults() {
+        // Given
+        sut = CityListViewController()
+        
+        // When
+        let searchController = UISearchController()
+        searchController.delegate = self
+        searchController.searchBar.text = "Kath"
+        
+        let tableView = UITableView()
+        sut.tableView = tableView
+        sut.updateSearchResults(for: searchController)
+
+        // Then
+        
+        XCTAssertEqual(sut.searchManager.filteredCityCount(), 17)
+    }
+    
+    func testUpdateSearchResultsWhenDismatch() {
+        // Given
+        sut = CityListViewController()
+        
+        // When
+        let searchController = UISearchController()
+        searchController.delegate = self
+        searchController.searchBar.text = "Krmandu"
+        
+        let tableView = UITableView()
+        sut.tableView = tableView
+        sut.updateSearchResults(for: searchController)
+
+        // Then
+        
+        XCTAssertEqual(sut.searchManager.filteredCityCount(), 0)
+    }
 }
