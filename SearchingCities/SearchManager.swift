@@ -70,6 +70,12 @@ final class SearchManager {
         return mapModel(item: filteredCities[index])
     }
     
+    func filteredCitiesAtIndex(index: Int) -> CityList.CityItemModel {
+        let filteredCities = Array(cityItemModel[filterStart..<filterEnd + 1])
+        
+        return filteredCities[index]
+    }
+    
     private func mapModel(item: CityList.CityItemModel) -> SimpleItemViewModel {
         var title: String = ""
         var subTitle: String = ""

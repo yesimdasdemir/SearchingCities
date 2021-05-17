@@ -121,10 +121,10 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cityViewModel: CityList.CityItemModel = isFiltering ? filteredCities[indexPath.row] : cityModelList[indexPath.row]
-//        let mapViewModel: CityDetail.MapViewModel = getMapViewModel(viewModel: cityViewModel)
-//
-//        router?.routeToCityDetail(viewModel: mapViewModel)
+        let cityViewModel: CityList.CityItemModel = isFiltering ? searchManager.filteredCitiesAtIndex(index: indexPath.row) : cityModelList[indexPath.row]
+        let mapViewModel: CityDetail.MapViewModel = getMapViewModel(viewModel: cityViewModel)
+
+        router?.routeToCityDetail(viewModel: mapViewModel)
     }
     
     private func getMapViewModel(viewModel: CityList.CityItemModel) -> CityDetail.MapViewModel {
