@@ -12,4 +12,3 @@ CityDetailViewController responsible for open map with coordinateModel.
 Custom components were used for listing cities.
 
 Binary search algorithm was used for searching. SearchManager is responsible for all method about filtering.
-
