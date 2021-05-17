@@ -11,6 +11,7 @@
 		2462C7F4264C8BC70088D561 /* SimpleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2462C7F3264C8BC70088D561 /* SimpleItemView.swift */; };
 		2462C7F6264C8BD30088D561 /* SimpleItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2462C7F5264C8BD30088D561 /* SimpleItemView.xib */; };
 		247C409B2652622000DF6CCB /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247C409A2652622000DF6CCB /* SearchManager.swift */; };
+		247C409C26528A7800DF6CCB /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247C409A2652622000DF6CCB /* SearchManager.swift */; };
 		24B0A617264B089900BDAA62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B0A616264B089900BDAA62 /* AppDelegate.swift */; };
 		24B0A619264B089900BDAA62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B0A618264B089900BDAA62 /* SceneDelegate.swift */; };
 		24B0A61E264B089900BDAA62 /* CityList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24B0A61C264B089900BDAA62 /* CityList.storyboard */; };
@@ -387,6 +388,7 @@
 				24F31E62264FFCD4007E2B6D /* SearchingCitiesTests.swift in Sources */,
 				24F31E69264FFCD7007E2B6D /* CityListPresenterTests.swift in Sources */,
 				24F31E72264FFD3B007E2B6D /* CityListPresenter.swift in Sources */,
+				247C409C26528A7800DF6CCB /* SearchManager.swift in Sources */,
 				24F31E76264FFD53007E2B6D /* CityDetailModels.swift in Sources */,
 				24F31E73264FFD42007E2B6D /* CityListRouter.swift in Sources */,
 				24F31E6B264FFCE2007E2B6D /* CityListInteractorTests.swift in Sources */,

@@ -10,10 +10,9 @@
 //  see http://clean-swift.com
 //
 
-@testable import SearchingCities
 import XCTest
 
-final class CityDetailViewControllerTests: XCTestCase {
+class CityDetailViewControllerTests: XCTestCase {
     // MARK: Subject under test
     
     var sut: CityDetailViewController!
@@ -37,7 +36,7 @@ final class CityDetailViewControllerTests: XCTestCase {
     func setupCityDetailViewController() {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "CityDetail", bundle: bundle)
-        sut = storyboard.instantiateViewController(withIdentifier: "CityDetailViewController") as? CityDetailViewController
+        sut = storyboard.instantiateViewController(withIdentifier: "CityDetail") as? CityDetailViewController
     }
     
     func loadView() {
@@ -59,23 +58,4 @@ final class CityDetailViewControllerTests: XCTestCase {
     
     // MARK: Tests
     
-    func testShouldDoSomethingWhenViewIsLoaded() {
-        // Given
-        let spy = CityDetailBusinessLogicSpy()
-        sut.interactor = spy
-        
-        // When
-        loadView()
-        
-        // Then
-    }
-    
-    func testDisplaySomething() {
-        // Given
-        
-        // When
-        loadView()
-        
-        // Then
-    }
 }

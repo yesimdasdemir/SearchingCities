@@ -38,11 +38,11 @@ class CityListPresenterTests: XCTestCase {
     // MARK: Test doubles
     
     class CityListDisplayLogicSpy: CityListDisplayLogic {
-        func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel]) {
-            
-        }
+        var displayCityListCalled = false
         
-
+        func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel], contentViewModel: ContentViewModel?) {
+            displayCityListCalled = true
+        }
     }
     
     // MARK: Tests

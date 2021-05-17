@@ -55,15 +55,4 @@ class CityListViewControllerTests: XCTestCase {
     }
     
     // MARK: Tests
-    
-    func testShouldDoSomethingWhenViewIsLoaded() {
-        // Given
-        let spy = CityListBusinessLogicSpy()
-        sut.interactor = spy
-        
-        // When
-        loadView()
-        
-        // Then
-    }
 }
