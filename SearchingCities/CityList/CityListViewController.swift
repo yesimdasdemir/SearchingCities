@@ -27,17 +27,10 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
     private var simpleItemModelList: [SimpleItemViewModel] = []
     private var contentViewModel: ContentViewModel?
     private var cityModelList: [CityList.CityItemModel] = []
-    private var filtered2Cities: [CityList.CityItemModel] = []
-    private var filteredCities: [SimpleItemViewModel] = []
-    private var lowerCaseCities: [CityList.CityItemModel] = []
     private let customCellHeight: CGFloat = 70.0
     
     private var searchManager = SearchManager()
-    
-    private var lowerSearchText: String {
-        return searchController.searchBar.text?.lowercased() ?? ""
-    }
-    
+
     var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
@@ -102,23 +95,6 @@ final class CityListViewController: UIViewController, CityListDisplayLogic {
         definesPresentationContext = true
     }
     
-    private func filterContentForSearchText(_ searchText: String,
-                                            category: CityList.CityItemModel? = nil) {
-        
-        filtered2Cities = cityModelList.filter({ item in
-            item.name!.lowercased().contains(searchText.lowercased())
-        })
-        
-        filteredCities = filtered2Cities.map({ item in
-            let title: String = item.name! + ", " + item.countryName!
-            let subTitle: String = String((item.coordinate?.longitude)!) + ", " + String((item.coordinate?.latitude)!)
-            
-            return SimpleItemViewModel(id: item.id,
-                                       title: title,
-                                       subTitle: subTitle)
-        })
-    }
-    
     func displayCityList(simpleItemModelList: [SimpleItemViewModel], cityItemList: [CityList.CityItemModel], contentViewModel: ContentViewModel?) {
         self.simpleItemModelList = simpleItemModelList
         cityModelList = cityItemList
@@ -145,10 +121,10 @@ extension CityListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cityViewModel: CityList.CityItemModel = isFiltering ? filtered2Cities[indexPath.row] : cityModelList[indexPath.row]
-        let mapViewModel: CityDetail.MapViewModel = getMapViewModel(viewModel: cityViewModel)
-        
-        router?.routeToCityDetail(viewModel: mapViewModel)
+//        let cityViewModel: CityList.CityItemModel = isFiltering ? filteredCities[indexPath.row] : cityModelList[indexPath.row]
+//        let mapViewModel: CityDetail.MapViewModel = getMapViewModel(viewModel: cityViewModel)
+//
+//        router?.routeToCityDetail(viewModel: mapViewModel)
     }
     
     private func getMapViewModel(viewModel: CityList.CityItemModel) -> CityDetail.MapViewModel {
